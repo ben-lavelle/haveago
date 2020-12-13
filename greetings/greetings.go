@@ -3,9 +3,9 @@ package greetings
 import (
 	"errors"
 	"fmt"
+	"math/rand"
 )
 
-// Pants
 // Go exports names that start with capitals for use
 // outside the package.
 
@@ -17,6 +17,19 @@ func Hello(name string) (string, error) {
 	}
 	// := declares and initialises; could've used:
 	// var message string; message = ...
-	message := fmt.Sprintf("Hi, %v. Welcome!", name)
+	message := fmt.Sprintf(randomFormat(), name)
 	return message, nil
+}
+
+func randomFormat() string {
+	// A slice is like a dynamically-sized array
+	// Initially omitting size in [] allows this
+	formats := []string{
+		"Hi, %v. Welcome!",
+		"Great to see you, %v.",
+		"Wassup %v.",
+	}
+
+	// Select a random message to return
+	return formats[rand.Intn(len(formats))]
 }
