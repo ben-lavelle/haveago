@@ -22,6 +22,27 @@ func Hello(name string) (string, error) {
 	return message, nil
 }
 
+// Hellos returns a map that associates each of the
+// named people with a greeting message.
+func Hellos(names []string) (map[string]string, error) {
+	// A map associates names with messages; maps
+	// are k-v pairs: make(map[key-type]value-type)
+	messages := make(map[string]string)
+	// Loop through the input slice of names, calling
+	// Hello for each of them.
+	// Range returns index, item - ignore index
+	for _, name := range names {
+		message, err := Hello(name)
+		if err != nil {
+			return nil, err
+		}
+		// In the map, associate the message with
+		// the appropriate name.
+		messages[name] = message
+	}
+	return messages, nil
+}
+
 // If a pre-run init with Seed isn't called, rand
 // assumes Seed(1) -- always the same output.
 func init() {
